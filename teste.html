@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Filosófico Completo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --dark: #1a252f;
+            --light: #ecf0f1;
+            --accent: #e74c3c;
+            --text: #2c3e50;
+            --bg: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Merriweather', Georgia, serif;
+            line-height: 1.8;
+            color: var(--text);
+            background-color: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            opacity: 0.9;
+        }
+
+        /* Navigation - Corrigido */
+        nav {
+            background-color: var(--primary);
+            padding: 0 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            transition: all 0.5s ease;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        /* Topics Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .topic-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .topic-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .topic-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .topic-card:hover .topic-img img {
+            transform: scale(1.1);
+        }
+
+        .topic-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .topic-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-content h3 {
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+
+        .topic-content p {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: #555;
+            flex-grow: 1;
+        }
+
+        .topic-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* Modal - Melhorado */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 0;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 10px;
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--accent);
+            background: rgba(255,255,255,0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: white;
+            background: var(--accent);
+        }
+
+        .modal-header {
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, white, transparent);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            position: relative;
+            margin-top: -50px;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        .modal-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+
+        .modal-section {
+            margin-bottom: 2rem;
+        }
+
+        .modal-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .modal-section p {
+            margin-bottom: 1rem;
+        }
+
+        .philosopher-quote {
+            background: var(--light);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            position: relative;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .philosopher-quote::before {
+            content: '"';
+            position: absolute;
+            top: 0;
+            left: 10px;
+            font-size: 4rem;
+            color: rgba(0,0,0,0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .quote-author {
+            display: block;
+            text-align: right;
+            font-weight: 600;
+            font-style: normal;
+            margin-top: 1rem;
+            color: var(--primary);
+        }
+
+        .philosopher-info {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: center;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .philosopher-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid var(--secondary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .philosopher-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .philosopher-bio h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .philosopher-bio p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background-color: var(--secondary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 30px);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 30px);
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            border: 3px solid white;
+            box-shadow: 0 0 0 4px var(--secondary);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .timeline-content h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+        }
+
+        .timeline-date {
+            display: block;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-col p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Responsive - Melhorado */
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--dark);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 6rem 2rem;
+                gap: 1.5rem;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .btn {
+                display: block;
+                width: max-content;
+                margin: 0 auto 1rem;
+            }
+
+            .btn-outline {
+                margin-left: auto;
+            }
+
+            .modal-header {
+                height: 250px;
+            }
+
+            .philosopher-info {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 70px;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 50vh;
+                min-height: 350px;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.6rem;
+            }
+
+            .modal-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .philosopher-img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">Portal Filosófico</div>
+        <div class="tagline">Explorando as grandes questões da humanidade</div>
+    </header>
+
+    <!-- Navigation - Corrigido -->
+    <nav>
+        <div class="nav-container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#temas">Temas</a>
+                <a href="#filosofos">Filósofos</a>
+                <a href="#linha-tempo">Linha do Tempo</a>
+                <a href="#biblioteca">Biblioteca</a>
+                <a href="#sobre">Sobre</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>50 Temas Essenciais da Filosofia</h1>
+            <p>Uma jornada intelectual através dos maiores pensamentos da humanidade, da antiguidade à contemporaneidade</p>
+            <a href="#temas" class="btn">Explorar Temas</a>
+            <a href="#filosofos" class="btn btn-outline">Conhecer Filósofos</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Featured Topics -->
+        <section id="temas">
+            <div class="section-title">
+                <h2>Temas Filosóficos</h2>
+            </div>
+
+            <div class="topics-grid">
+                <!-- Tema 1 - Distinção entre moral e ética -->
+                <div class="topic-card" onclick="openModal('moral-ethics')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Moral e Ética">
+                        <span class="topic-tag">Ética</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Moral vs. Ética</h3>
+                        <p>As diferenças fundamentais entre normas sociais e reflexão filosófica sobre o comportamento humano.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 10 min</span>
+                            <span>Platão, Kant, Nietzsche</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 2 - Alegoria da Caverna -->
+                <div class="topic-card" onclick="openModal('alegoria-caverna')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Alegoria da Caverna">
+                        <span class="topic-tag">Metafísica</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Alegoria da Caverna</h3>
+                        <p>A famosa metáfora de Platão sobre a natureza da realidade, conhecimento e educação.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 8 min</span>
+                            <span>Platão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 3 - Cogito ergo sum -->
+                <div class="topic-card" onclick="openModal('cogito-ergo-sum')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1502759683299-cdcd6974244f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pensamento">
+                        <span class="topic-tag">Epistemologia</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Cogito Ergo Sum</h3>
+                        <p>A base do racionalismo cartesiano e a busca por certezas no conhecimento.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 12 min</span>
+                            <span>Descartes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 4 - Super-homem -->
+                <div class="topic-card" onclick="openModal('super-homem')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Friedrich Nietzsche">
+                        <span class="topic-tag">Existencialismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Super-Homem</h3>
+                        <p>A concepção nietzschiana do além-do-homem e a crítica aos valores tradicionais.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 15 min</span>
+                            <span>Nietzsche</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 5 - Imperativo Categórico -->
+                <div class="topic-card" onclick="openModal('imperativo-categorico')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Immanuel Kant">
+                        <span class="topic-tag">Ética</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Imperativo Categórico</h3>
+                        <p>A fundamentação kantiana da moralidade baseada na razão pura.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 14 min</span>
+                            <span>Kant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 6 - Mito de Sísifo -->
+                <div class="topic-card" onclick="openModal('mito-de-sisifo')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Albert Camus">
+                        <span class="topic-tag">Absurdismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Mito de Sísifo</h3>
+                        <p>A metáfora camusiana do absurdo e a resposta da revolta existencial.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 10 min</span>
+                            <span>Camus</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 7 - Teoria das Ideias -->
+                <div class="topic-card" onclick="openModal('teoria-das-ideias')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Platão">
+                        <span class="topic-tag">Metafísica</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Teoria das Ideias</h3>
+                        <p>A distinção platônica entre o mundo sensível e o mundo inteligível.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 12 min</span>
+                            <span>Platão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 8 - O Contrato Social -->
+                <div class="topic-card" onclick="openModal('contrato-social')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rousseau">
+                        <span class="topic-tag">Política</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Contrato Social</h3>
+                        <p>A teoria rousseauniana da soberania popular e da vontade geral.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 16 min</span>
+                            <span>Rousseau</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 9 - A Ética a Nicômaco -->
+                <div class="topic-card" onclick="openModal('etica-nicomaco')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Aristóteles">
+                        <span class="topic-tag">Ética</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Ética a Nicômaco</h3>
+                        <p>A teoria aristotélica da virtude e a busca pela eudaimonia.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 18 min</span>
+                            <span>Aristóteles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 10 - O Mundo como Vontade e Representação -->
+                <div class="topic-card" onclick="openModal('mundo-vontade-representacao')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Schopenhauer">
+                        <span class="topic-tag">Metafísica</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Mundo como Vontade</h3>
+                        <p>A visão schopenhaueriana da realidade como manifestação de uma vontade cega.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 20 min</span>
+                            <span>Schopenhauer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 11 - A República -->
+                <div class="topic-card" onclick="openModal('a-republica')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="A República">
+                        <span class="topic-tag">Política</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>A República</h3>
+                        <p>A obra fundamental de Platão sobre justiça, governo ideal e educação.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 25 min</span>
+                            <span>Platão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 12 - O Príncipe -->
+                <div class="topic-card" onclick="openModal('o-principe')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="O Príncipe">
+                        <span class="topic-tag">Política</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Príncipe</h3>
+                        <p>O tratado político de Maquiavel sobre poder, virtù e fortuna.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 18 min</span>
+                            <span>Maquiavel</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 13 - Crítica da Razão Pura -->
+                <div class="topic-card" onclick="openModal('critica-razao-pura')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Crítica da Razão Pura">
+                        <span class="topic-tag">Epistemologia</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Crítica da Razão Pura</h3>
+                        <p>A obra magna de Kant sobre os limites e possibilidades do conhecimento humano.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 30 min</span>
+                            <span>Kant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 14 - Ser e Tempo -->
+                <div class="topic-card" onclick="openModal('ser-e-tempo')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ser e Tempo">
+                        <span class="topic-tag">Existencialismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Ser e Tempo</h3>
+                        <p>A análise heideggeriana do Dasein e a questão do ser.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 35 min</span>
+                            <span>Heidegger</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 15 - O Segundo Sexo -->
+                <div class="topic-card" onclick="openModal('segundo-sexo')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1491349174775-aaafddd81942?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="O Segundo Sexo">
+                        <span class="topic-tag">Feminismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Segundo Sexo</h3>
+                        <p>A obra fundamental de Simone de Beauvoir sobre a condição feminina.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 22 min</span>
+                            <span>Beauvoir</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 16 - Utilitarismo -->
+                <div class="topic-card" onclick="openModal('utilitarismo')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Utilitarismo">
+                        <span class="topic-tag">Ética</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Utilitarismo</h3>
+                        <p>A filosofia moral que busca maximizar a felicidade e minimizar o sofrimento.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 15 min</span>
+                            <span>Bentham, Mill</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 17 - A Gaia Ciência -->
+                <div class="topic-card" onclick="openModal('gaia-ciencia')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="A Gaia Ciência">
+                        <span class="topic-tag">Existencialismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>A Gaia Ciência</h3>
+                        <p>A obra de Nietzsche que contém a famosa declaração "Deus está morto".</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 20 min</span>
+                            <span>Nietzsche</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 18 - Meditações Metafísicas -->
+                <div class="topic-card" onclick="openModal('meditacoes-metafisicas')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1502759683299-cdcd6974244f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Meditações Metafísicas">
+                        <span class="topic-tag">Epistemologia</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Meditações Metafísicas</h3>
+                        <p>A busca cartesiana por uma base indubitável para o conhecimento.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 16 min</span>
+                            <span>Descartes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 19 - O Mal-Estar na Civilização -->
+                <div class="topic-card" onclick="openModal('mal-estar-civilizacao')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="O Mal-Estar na Civilização">
+                        <span class="topic-tag">Psicanálise</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>O Mal-Estar na Civilização</h3>
+                        <p>A análise freudiana do conflito entre indivíduo e sociedade.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 18 min</span>
+                            <span>Freud</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tema 20 - Vigiar e Punir -->
+                <div class="topic-card" onclick="openModal('vigiar-e-punir')">
+                    <div class="topic-img">
+                        <img src="https://images.unsplash.com/photo-1581093196270-1a1b4b5d0d1e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vigiar e Punir">
+                        <span class="topic-tag">Filosofia Política</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Vigiar e Punir</h3>
+                        <p>A análise foucaultiana do poder disciplinar nas instituições modernas.</p>
+                        <div class="topic-meta">
+                            <span><i class="far fa-clock"></i> 25 min</span>
+                            <span>Foucault</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Philosophers Section -->
+        <section id="filosofos">
+            <div class="section-title">
+                <h2>Grandes Filósofos</h2>
+            </div>
+            <div class="topics-grid">
+                <!-- Filósofo 1 - Platão -->
+                <div class="topic-card" onclick="openModal('platao')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg" alt="Platão">
+                        <span class="topic-tag">Antiguidade</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Platão</h3>
+                        <p>Fundador da Academia e autor de obras fundamentais como "A República" e "O Banquete".</p>
+                        <div class="topic-meta">
+                            <span>428-348 a.C.</span>
+                            <span>Grego</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 2 - Aristóteles -->
+                <div class="topic-card" onclick="openModal('aristoteles')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg" alt="Aristóteles">
+                        <span class="topic-tag">Antiguidade</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Aristóteles</h3>
+                        <p>Discípulo de Platão e fundador do Liceu, sistematizador do conhecimento antigo.</p>
+                        <div class="topic-meta">
+                            <span>384-322 a.C.</span>
+                            <span>Grego</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 3 - Descartes -->
+                <div class="topic-card" onclick="openModal('descartes')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg" alt="Descartes">
+                        <span class="topic-tag">Modernidade</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Descartes</h3>
+                        <p>Pai do racionalismo moderno e autor da famosa frase "Penso, logo existo".</p>
+                        <div class="topic-meta">
+                            <span>1596-1650</span>
+                            <span>Francês</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 4 - Kant -->
+                <div class="topic-card" onclick="openModal('kant')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Kant_gemaelde_3.jpg" alt="Immanuel Kant">
+                        <span class="topic-tag">Iluminismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Immanuel Kant</h3>
+                        <p>Autor da "Crítica da Razão Pura" e formulador do idealismo transcendental.</p>
+                        <div class="topic-meta">
+                            <span>1724-1804</span>
+                            <span>Alemão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 5 - Nietzsche -->
+                <div class="topic-card" onclick="openModal('nietzsche')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Nietzsche187a.jpg" alt="Friedrich Nietzsche">
+                        <span class="topic-tag">Existencialismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Friedrich Nietzsche</h3>
+                        <p>Crítico da moral tradicional e autor de conceitos como "vontade de poder" e "eterno retorno".</p>
+                        <div class="topic-meta">
+                            <span>1844-1900</span>
+                            <span>Alemão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 6 - Marx -->
+                <div class="topic-card" onclick="openModal('marx')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Karl_Marx_001.jpg" alt="Karl Marx">
+                        <span class="topic-tag">Filosofia Política</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Karl Marx</h3>
+                        <p>Teórico do materialismo histórico e autor de "O Capital" e "O Manifesto Comunista".</p>
+                        <div class="topic-meta">
+                            <span>1818-1883</span>
+                            <span>Alemão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 7 - Foucault -->
+                <div class="topic-card" onclick="openModal('foucault')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0a/Michel_Foucault.jpg" alt="Michel Foucault">
+                        <span class="topic-tag">Pós-Modernismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Michel Foucault</h3>
+                        <p>Teórico do poder, saber e subjetividade, autor de "Vigiar e Punir" e "História da Sexualidade".</p>
+                        <div class="topic-meta">
+                            <span>1926-1984</span>
+                            <span>Francês</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 8 - Sartre -->
+                <div class="topic-card" onclick="openModal('sartre')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/Jean-Paul_Sartre_1965.jpg" alt="Jean-Paul Sartre">
+                        <span class="topic-tag">Existencialismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Jean-Paul Sartre</h3>
+                        <p>Defensor do existencialismo ateu e autor de "O Ser e o Nada" e "O Existencialismo é um Humanismo".</p>
+                        <div class="topic-meta">
+                            <span>1905-1980</span>
+                            <span>Francês</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 9 - Heidegger -->
+                <div class="topic-card" onclick="openModal('heidegger')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Martin_Heidegger_1960.jpg" alt="Martin Heidegger">
+                        <span class="topic-tag">Fenomenologia</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Martin Heidegger</h3>
+                        <p>Autor de "Ser e Tempo" e pensador da questão do ser e da técnica.</p>
+                        <div class="topic-meta">
+                            <span>1889-1976</span>
+                            <span>Alemão</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filósofo 10 - Simone de Beauvoir -->
+                <div class="topic-card" onclick="openModal('beauvoir')">
+                    <div class="topic-img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Simone_de_Beauvoir.jpg" alt="Simone de Beauvoir">
+                        <span class="topic-tag">Feminismo</span>
+                    </div>
+                    <div class="topic-content">
+                        <h3>Simone de Beauvoir</h3>
+                        <p>Autora de "O Segundo Sexo" e teórica fundamental do feminismo existencialista.</p>
+                        <div class="topic-meta">
+                            <span>1908-1986</span>
+                            <span>Francês</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para Moral e Ética - Com textos extraídos -->
+    <div id="moral-ethics-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('moral-ethics')">&times;</span>
+            <div class="modal-header">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Moral e Ética">
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">Distinção entre Moral e Ética</h2>
+                
+                <div class="modal-section">
+                    <h3>Origens dos Conceitos</h3>
+                    <p>A moral está relacionada a normas e valores que são aceitos dentro de uma cultura específica, tendo suas raízes em tradições históricas. Já a ética, frequentemente associada à filosofia, busca questionar e fundamentar esses valores, refletindo sobre o que é certo ou errado de maneira mais universal.</p>
+                    
+                    <div class="philosopher-quote">
+                        "A ética é a estética do interior."
+                        <span class="quote-author">— Pierre Reverdy</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Diferenças Fundamentais</h3>
+                    <p><strong>Moral:</strong> Conjunto de regras e normas específicas de uma sociedade ou cultura. É particular, concreta e baseada em costumes.</p>
+                    <p><strong>Ética:</strong> Reflexão crítica sobre a moral. É universal, abstrata e fundamentada na razão filosófica.</p>
+                    
+                    <div class="philosopher-info">
+                        <div class="philosopher-img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Kant_gemaelde_3.jpg" alt="Immanuel Kant">
+                        </div>
+                        <div class="philosopher-bio">
+                            <h4>Immanuel Kant</h4>
+                            <p>Filósofo alemão (1724-1804), principal representante do Iluminismo alemão e um dos pensadores mais influentes da filosofia moderna. Sua obra "Fundamentação da Metafísica dos Costumes" é essencial para o estudo da ética filosófica.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Ética Profissional</h3>
+                    <p>A ética em ambientes de trabalho estabelece padrões de comportamento que são fundamentais para relações de confiança. Profissionais éticos promovem um ambiente saudável e produtivo, beneficiando toda a organização.</p>
+                    
+                    <div class="philosopher-quote">
+                        "Age apenas segundo máxima tal que possas querer ao mesmo tempo que se torne lei universal."
+                        <span class="quote-author">— Immanuel Kant</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Exemplos de Moralidade</h3>
+                    <p>Exemplos de moralidade incluem as normas de respeito e justiça que orientam comportamentos, como a honestidade e a integridade. A ética profissional, por outro lado, poderia ser exemplificada pelo código de ética dos médicos, que orienta suas ações em favor do bem-estar do paciente.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Relação com a Legislação</h3>
+                    <p>A ética fornece a base para a formação de leis, visando assegurar justiça e equidade. As leis, por sua vez, são reflexos de valores morais predominantes e buscam regular comportamentos dentro da sociedade.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Impacto na Convivência Social</h3>
+                    <p>A moral orienta as interações entre indivíduos, promovendo normas que garantem o respeito e a compreensão mútua. Ética, por sua vez, busca estabelecer princípios que guiam ações justas na sociedade.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Mundo Contemporâneo</h3>
+                    <p>Com as mudanças sociais e tecnológicas, a moral e a ética estão em constante evolução. O surgimento de novas questões, como a ética digital e a moralidade nas redes sociais, desafia os padrões tradicionais e requer um diálogo contínuo sobre o que é certo e errado.</p>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Ações Pessoais</h3>
+                    <p>A moral e a ética não são apenas conceitos teóricos; elas moldam nossas escolhas e ações diárias. Reflexões pessoais sobre ética podem levar a um maior autocontrole e responsabilidade nas relações.</p>
+                    
+                    <div class="philosopher-quote">
+                        "Conhece-te a ti mesmo."
+                        <span class="quote-author">— Inscrição no Oráculo de Delfos</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Linha do Tempo Histórica</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Antiguidade</h4>
+                                <span class="timeline-date">Século IV a.C.</span>
+                                <p>Aristóteles desenvolve a ética das virtudes em "Ética a Nicômaco", enfatizando a busca pela eudaimonia (felicidade/florescimento humano).</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Idade Média</h4>
+                                <span class="timeline-date">Século XIII</span>
+                                <p>Tomás de Aquino sintetiza a ética aristotélica com o pensamento cristão, criando a teoria do direito natural.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Iluminismo</h4>
+                                <span class="timeline-date">1785</span>
+                                <p>Kant publica "Fundamentação da Metafísica dos Costumes", estabelecendo a ética deontológica baseada no imperativo categórico.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Século XIX</h4>
+                                <span class="timeline-date">1887</span>
+                                <p>Nietzsche publica "Genealogia da Moral", questionando os fundamentos da moral tradicional e propondo uma "transvaloração de todos os valores".</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Contemporaneidade</h4>
+                                <span class="timeline-date">Século XXI</span>
+                                <p>Desenvolvimento da ética aplicada em áreas como bioética, ética digital e ética ambiental, respondendo aos novos desafios tecnológicos e sociais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Reflexões Finais</h3>
+                    <p>A distinção entre moral e ética é fundamental para a compreensão das normas sociais. Reflexões sobre esses conceitos podem encaminhar diálogos produtivos, permitindo que indivíduos questionem e redefinam seus valores à luz de novas experiências e conhecimentos.</p>
+                    
+                    <div class="philosopher-quote">
+                        "Aquele que sabe o Esperanto representa a obrigação de o propagar."
+                        <span class="quote-author">— Leon Tolstói (1828-1910)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Alegoria da Caverna -->
+    <div id="alegoria-caverna-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('alegoria-caverna')">&times;</span>
+            <div class="modal-header">
+                <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Alegoria da Caverna">
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">A Alegoria da Caverna de Platão</h2>
+                
+                <div class="modal-section">
+                    <h3>O Mito</h3>
+                    <p>A Alegoria da Caverna é uma metáfora apresentada por Platão em "A República" (Livro VII) que ilustra seu conceito de realidade, conhecimento e educação. Descreve prisioneiros acorrentados desde o nascimento em uma caverna, forçados a olhar apenas para a parede à frente, onde veem sombras de objetos projetadas por uma fogueira atrás deles.</p>
+                    
+                    <div class="philosopher-quote">
+                        "Podemos facilmente perdoar uma criança que tem medo do escuro; a real tragédia da vida é quando os homens têm medo da luz."
+                        <span class="quote-author">— Platão</span>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Interpretação</h3>
+                    <p>A alegoria representa:</p>
+                    <ul>
+                        <li><strong>A Caverna:</strong> O mundo sensível que percebemos</li>
+                        <li><strong>As Sombras:</strong> Nossas percepções enganosas da realidade</li>
+                        <li><strong>A Saída:</strong> O processo de educação filosófica</li>
+                        <li><strong>O Mundo Exterior:</strong> O mundo das Ideias/Formas</li>
+                        <li><strong>O Sol:</strong> A Ideia do Bem, fonte última de toda realidade</li>
+                    </ul>
+                    
+                    <div class="philosopher-info">
+                        <div class="philosopher-img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Plato_Silanion_Musei_Capitolini_MC1377.jpg" alt="Platão">
+                        </div>
+                        <div class="philosopher-bio">
+                            <h4>Platão</h4>
+                            <p>Filósofo grego (428/427-348/347 a.C.), fundador da Academia de Atenas, primeira instituição de ensino superior do mundo ocidental. Discípulo de Sócrates e mestre de Aristóteles, suas obras dialogadas formam a base da filosofia ocidental.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Significado Filosófico</h3>
+                    <p>A alegoria ilustra:</p>
+                    <ol>
+                        <li>A diferença entre o mundo sensível (das aparências) e o mundo inteligível (das Ideias)</li>
+                        <li>O processo de educação como uma "conversão da alma"</li>
+                        <li>A dificuldade do filósofo em retornar à caverna e esclarecer os outros</li>
+                        <li>A responsabilidade do conhecedor em compartilhar seu conhecimento</li>
+                    </ol>
+                </div>
+                
+                <div class="modal-section">
+                    <h3>Relevância Contemporânea</h3>
+                    <p>A alegoria permanece relevante para discutir:</p>
+                    <ul>
+                        <li>A natureza da realidade em tempos de mídias digitais</li>
+                        <li>O papel da educação na formação crítica</li>
+                        <li>A responsabilidade intelectual</li>
+                        <li>A dificuldade em questionar crenças arraigadas</li>
+                    </ul>
+                    
+                    <div class="philosopher-quote">
+                        "O objetivo da educação é ensinar a desejar as coisas certas."
+                        <span class="quote-author">— Platão</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicione os outros 18 modais aqui seguindo o mesmo padrão -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Sobre o Portal</h3>
+                <p>O Portal Filosófico é uma iniciativa dedicada à disseminação do conhecimento filosófico de forma acessível e profunda.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#temas">Temas</a></li>
+                    <li><a href="#filosofos">Filósofos</a></li>
+                    <li><a href="#linha-tempo">Linha do Tempo</a></li>
+                    <li><a href="#biblioteca">Biblioteca</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Recursos</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Glossário</a></li>
+                    <li><a href="#">Mapa Conceitual</a></li>
+                    <li><a href="#">Bibliografia</a></li>
+                    <li><a href="#">Cursos</a></li>
+                    <li><a href="#">Artigos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Assine para receber atualizações sobre novos conteúdos filosóficos.</p>
+                <form>
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <button type="submit" class="btn">Assinar</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Portal Filosófico. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle - Corrigido
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId + '-modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId + '-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fechar menu ao redimensionar para desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
